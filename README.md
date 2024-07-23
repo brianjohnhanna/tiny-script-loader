@@ -32,7 +32,7 @@ var loadScript = require('tiny-script-loader/loadScript')
 var loadScriptPromised = require('tiny-script-loader/loadScriptPromised')
 
 loadScript('https://example.com/script.js', callbackFn, { crossOrigin: true })
-loadScriptPromised('https://example.com/script.js', { type: 'javascript' })
+loadScriptPromised('https://example.com/script.js', { type: 'javascript', 'data-custom' : 'value' })
   .then(fn)
 ```
 ## License

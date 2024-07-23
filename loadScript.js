@@ -7,7 +7,11 @@ module.exports = function loadScript (src, cb, attrs) {
   firstScript = doc.getElementsByTagName(tag)[0]
   if (attrs) {
     Object.keys(attrs).forEach(function (key) {
-      el[key] = attrs[key]
+      if (key.startsWith('data-')) {
+        el.dataset[key.slice(5)] = attrs[key]
+      } else {
+        el[key] = attrs[key]
+      }
     })
   }
   el.async = 1

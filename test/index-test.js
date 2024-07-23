@@ -57,6 +57,18 @@ describe('tiny-script-loader', function () {
       el.onload()
     })
 
+    it('should automatically apply "data-" attributes to the dataset', function (done) {
+      var attrsObj = {
+        'data-custom': 'customValue'
+      }
+      unit.loadScript('__u__', function (data) {
+        el.dataset.custom.should.equal('customValue')
+        done()
+      }, attrsObj)
+
+      el.onload()
+    })
+
     it('should not override reserved attributes', function (done) {
       var attrsObj = {
         src: 'wrong.js',
@@ -106,6 +118,19 @@ describe('tiny-script-loader', function () {
           el.type.should.equal('javascript')
           el.nonStandardProperty.should.equal('thing')
           el.invalidType.should.equal('invalid')
+          done()
+        })
+
+      el.onload()
+    })
+
+    it('should automatically apply "data-" attributes to the dataset', function (done) {
+      var attrsObj = {
+        'data-custom': 'customValue'
+      }
+      unit.loadScriptPromised('__u__', attrsObj)
+        .then(function () {
+          el.dataset.custom.should.equal('customValue')
           done()
         })
 
